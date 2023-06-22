@@ -1,3 +1,4 @@
+import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,12 +39,12 @@ public class SeleniumWebDriverTests {
         element.sendKeys(value);
     }
 
-    private void assertTableField(WebElement row, Field field, String expectedValue) {
-        WebElement cell = row.findElement(By.className("rt-td"));
-        String actualValue = cell.getText().trim();
-        assert actualValue.equals(expectedValue) : "Assertion failed for " + field.name() +
-                " field. Expected: " + expectedValue + ", Actual: " + actualValue;
-    }
+//    private void assertTableField(WebElement row, Field field, String expectedValue) {
+//        WebElement cell = row.findElement(By.className("rt-td"));
+//        String actualValue = cell.getText().trim();
+//        assert actualValue.equals(expectedValue) : "Assertion failed for " + field.name() +
+//                " field. Expected: " + expectedValue + ", Actual: " + actualValue;
+//    }
 
     @Test
     public void testWebTables(){
@@ -81,12 +82,14 @@ public class SeleniumWebDriverTests {
         }
 
         // Assert table fields with enum members
-        assertTableField(lastRow, Field.FIRST_NAME, "John");
-        assertTableField(lastRow, Field.LAST_NAME, "Doe");
-        assertTableField(lastRow, Field.EMAIL, "johndoe@example.com");
-        assertTableField(lastRow, Field.AGE, "30");
-        assertTableField(lastRow, Field.SALARY, "50000");
-        assertTableField(lastRow, Field.DEPARTMENT, "IT");
+        String row = lastRow.getText().trim();
+        String[]sRow = row.split("\n");
+        Assert.assertEquals(sRow[0], "John", "First name assertion failed");
+        Assert.assertEquals(sRow[1], "Doe", "Last name assertion failed");
+        Assert.assertEquals(sRow[2], "30", "Age assertion failed");
+        Assert.assertEquals(sRow[3], "johndoe@example.com", "Email assertion failed");
+        Assert.assertEquals(sRow[4], "50000", "Salary assertion failed");
+        Assert.assertEquals(sRow[5], "IT", "Department assertion failed");
     }
 }
 
