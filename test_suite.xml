@@ -2,7 +2,7 @@
 <suite name="Regression Suite">
     <test name="Operations Smoke">
         <classes>
-            <class name="SeleniumWebDriverTests"/>
+            <class name="webPageTests.TestWebPages"/>
         </classes>
     </test>
 </suite>
