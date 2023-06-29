@@ -15,7 +15,6 @@ public class TestWebPages {
 
     @BeforeTest
     public void testSetup() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\mmostovenko\\OneDrive\\Documents\\chromedriver_win32/chromedriver.exe");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
