@@ -2,7 +2,8 @@
 <suite name="Regression Suite">
     <test name="Operations Smoke">
         <classes>
-            <class name="webPageTests.TestWebPages"/>
+            <class name="webPageTests.PageWebTablesTests"/>
+            <class name="webPageTests.PageElementsButtonsTests"></class>
         </classes>
     </test>
 </suite>

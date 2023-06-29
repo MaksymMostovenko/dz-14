@@ -3,21 +3,24 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import jdk.jfr.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pageObects.PageButtonsChrome;
-import pageObects.PageElementsChrome;
 import pageObects.PageWebTables;
 
-public class TestWebPages {
+public class PageWebTablesTests {
     protected WebDriver driver;
 
     @BeforeTest
     public void testSetup() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
+
+        driver = new ChromeDriver(options);
     }
 
     @AfterTest
@@ -27,24 +30,8 @@ public class TestWebPages {
     }
 
     @Test
-    @Description("Try to click on button Buttons")
-    public void test1() {
-        PageElementsChrome elementsPageObject = new PageElementsChrome(driver);
-        elementsPageObject.clickOnButtons()
-                          .makeAssertion();
-    }
-
-    @Test
-    @Description("Test to click BUTTONS->ClickMe.")
-    public void test2(){
-        PageButtonsChrome buttonsPageObject = new PageButtonsChrome(driver);
-        buttonsPageObject.clickOnClickMe()
-                        .makeAssertion();
-    }
-
-    @Test
-    @Description("Any")
-    public void test3(){
+    @Description("Verify that user could add new data in the table.")
+    public void AddDataTest(){
         final String firstName = "First";
         final String lastName = "Last";
         final String age = "42";
@@ -55,13 +42,13 @@ public class TestWebPages {
         PageWebTables pageWebTables = new PageWebTables(driver);
         pageWebTables.clickAddButton()
                 .addNewRecord(firstName, lastName, age, email, salary, department)
-                .makeAssertionAdd(firstName, lastName, age, email, salary, department);
+                .assertAddDataTable(firstName, lastName, age, email, salary, department);
    }
 
 
     @Test
-    @Description("")
-    public void test4(){
+    @Description("Verify that user could edit existed data in the table.")
+    public void EditDataTest(){
         final String firstName = "First";
         final String lastName = "Last";
         final String age = "42";
@@ -72,6 +59,6 @@ public class TestWebPages {
         PageWebTables pageWebTables = new PageWebTables(driver);
         pageWebTables.clickEditButton()
                 .editRecord(firstName, lastName, age, email, salary, department)
-                .makeAssertionEdit(firstName, lastName, age, email, salary, department);
+                .assertEditDataTable(firstName, lastName, age, email, salary, department);
     }
 }

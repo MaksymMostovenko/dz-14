@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class PageWebTables extends AbstractPageObjectChrome {
+public class PageWebTables extends AbstractPageObjecе {
     private final By BUTTON_ADD = By.xpath("//button[@id=\"addNewRecordButton\"]");
     private final By INPUT_FIRST_NAME = By.xpath("//*[@id=\"firstName\"]");
     private final By INPUT_SECOND_NAME = By.xpath("//*[@id=\"lastName\"]");
@@ -65,7 +65,7 @@ public class PageWebTables extends AbstractPageObjectChrome {
         return this;
     }
 
-    public void makeAssertionAdd(String firstName, String lastName, String age, String email, String salary, String department){
+    public void assertAddDataTable(String firstName, String lastName, String age, String email, String salary, String department){
         String[] cells = this.getLastNonEmptyRow()
                                     .getText()
                                     .trim()
@@ -78,7 +78,7 @@ public class PageWebTables extends AbstractPageObjectChrome {
         Assert.assertEquals(cells[5], department, "Webtables input failed. Department not found.");
     }
 
-    public void makeAssertionEdit(String firstName, String lastName, String age, String email, String salary, String department){
+    public void assertEditDataTable(String firstName, String lastName, String age, String email, String salary, String department){
         String[] cells = this.getElements(EDITED_ROW)
                 .get(0)
                 .getText()

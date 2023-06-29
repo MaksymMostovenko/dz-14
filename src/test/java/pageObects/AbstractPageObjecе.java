@@ -10,11 +10,11 @@ import java.time.Duration;
 import java.util.List;
 
 
-public class AbstractPageObjectChrome {
+public class AbstractPageObjecе {
     private static final int WAIT_TIME_SEC = 1;
     protected WebDriver driver;
 
-    public AbstractPageObjectChrome(WebDriver driver) {
+    public AbstractPageObjecе(WebDriver driver) {
         this.driver = driver;
     }
 
